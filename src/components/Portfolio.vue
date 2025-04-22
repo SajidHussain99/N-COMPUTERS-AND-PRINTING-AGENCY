@@ -2,7 +2,21 @@
     <section id="portfolio">
       <h2>Our Work Portfolio</h2>
   
-      <div class="slider-container">
+      <!-- Mobile layout -->
+      <div class="portfolio-mobile" v-if="isMobile">
+        <div class="portfolio-card" v-for="(item, i) in items.slice(0, mobileVisible)" :key="i">
+          <img :src="item.image" :alt="item.alt" loading="lazy" />
+          <h3>{{ item.title }}</h3>
+        </div>
+  
+        <div v-if="items.length > 3" class="load-buttons">
+          <button v-if="mobileVisible < items.length" @click="mobileVisible += 2">Load More</button>
+          <button v-else-if="mobileVisible > 3" @click="mobileVisible = 3">See Less</button>
+        </div>
+      </div>
+  
+      <!-- Desktop slider -->
+      <div class="slider-container" v-else>
         <button class="nav-button left" @click="prevSlide">‹</button>
   
         <div class="slider-track" :style="{ transform: `translateX(-${currentIndex * (100 / visible)}%)` }">
@@ -36,21 +50,29 @@
   
   const visible = ref(3)
   const currentIndex = ref(0)
+  const mobileVisible = ref(3)
+  const isMobile = ref(window.innerWidth <= 640)
   
-  const updateVisible = () => {
+  const updateLayout = () => {
     const width = window.innerWidth
-    if (width <= 640) visible.value = 1
-    else if (width <= 768) visible.value = 2
-    else if (width <= 1024) visible.value = 3
-    else visible.value = 5
+    isMobile.value = width <= 640
+    if (width <= 640) {
+      visible.value = 1
+    } else if (width <= 768) {
+      visible.value = 2
+    } else if (width <= 1024) {
+      visible.value = 3
+    } else {
+      visible.value = 5
+    }
   }
   
   onMounted(() => {
-    updateVisible()
-    window.addEventListener('resize', updateVisible)
+    updateLayout()
+    window.addEventListener('resize', updateLayout)
   })
   onBeforeUnmount(() => {
-    window.removeEventListener('resize', updateVisible)
+    window.removeEventListener('resize', updateLayout)
   })
   
   const visibleItems = computed(() => {
@@ -83,7 +105,6 @@
     color: #111827;
   }
   
-  /* Slider */
   .slider-container {
     position: relative;
     width: 85%;
@@ -102,9 +123,7 @@
     padding: 1.25rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
-    box-shadow:
-      0 4px 8px rgba(0, 0, 0, 0.1),
-      0 6px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,13 +136,11 @@
     object-fit: cover;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
-    transition: transform 0.4s ease; /* Smooth transition */
+    transition: transform 0.4s ease;
   }
-  
   .portfolio-card img:hover {
-    transform: scale(1.1); /* Zoom in */
+    transform: scale(1.1);
   }
-  
   .portfolio-card h3 {
     font-size: 1rem;
     font-weight: 600;
@@ -147,21 +164,44 @@
   .nav-button.left {
     left: 0.5rem;
   }
-  
   .nav-button.right {
     right: 0.5rem;
   }
   
-  /* Responsive tweaks */
+  /* Mobile layout */
+  .portfolio-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .load-buttons {
+    margin-top: 1rem;
+  }
+  .load-buttons button {
+    background-color: #1f2937;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+  }
+  
+  /* Responsive card sizing */
   @media (max-width: 1024px) {
     .portfolio-card {
       flex: 0 0 calc(100% / 3);
     }
   }
-  
   @media (max-width: 640px) {
+    .slider-container {
+      display: none;
+    }
+  
     .portfolio-card {
-      flex: 0 0 100%;
+      width: 90%;
+      margin: 0.5rem auto;
     }
   }
   </style>

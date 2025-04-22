@@ -2,26 +2,26 @@
     <section id="testimonials">
       <h2>What Our Customers Say</h2>
   
-      <div class="slider-container">
-        <!-- Prev button -->
-        <button class="nav-button left" @click="prevSlide">‹</button>
-  
-        <!-- Track -->
-        <div class="slider-track" :style="{ transform: `translateX(-${currentIndex * (100 / visible)}%)` }">
-          <div class="testimonial-card" v-for="(t, i) in visibleTestimonials" :key="i">
-            <p class="quote">"{{ t.message }}"</p>
-            <h4 class="name">— {{ t.name }}</h4>
-          </div>
+      <div class="testimonial-wrapper">
+        <div
+          class="testimonial-card"
+          v-for="(t, i) in visibleTestimonials"
+          :key="i"
+        >
+          <p class="quote">"{{ t.message }}"</p>
+          <h4 class="name">— {{ t.name }}</h4>
         </div>
+      </div>
   
-        <!-- Next button -->
-        <button class="nav-button right" @click="nextSlide">›</button>
+      <div class="testimonial-buttons" v-if="testimonials.length > 3">
+        <button v-if="visibleCount < testimonials.length" @click="showMore">See More</button>
+        <button v-else @click="showLess">See Less</button>
       </div>
     </section>
   </template>
   
   <script setup>
-  import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+  import { ref, computed } from 'vue'
   
   const testimonials = [
     { name: 'Ahsan Ali', message: 'Fast and professional printing services. Highly recommended!' },
@@ -31,38 +31,16 @@
     { name: 'Ali Raza', message: 'Loved the clarity of the prints and the customer care.' },
   ]
   
-  const visible = ref(2)
-  const currentIndex = ref(0)
+  const visibleCount = ref(3)
   
-  const updateVisible = () => {
-    const width = window.innerWidth
-    if (width <= 640) visible.value = 1
-    else if (width <= 1024) visible.value = 2
-    else visible.value = 3
+  const visibleTestimonials = computed(() => testimonials.slice(0, visibleCount.value))
+  
+  function showMore() {
+    visibleCount.value = testimonials.length
   }
   
-  onMounted(() => {
-    updateVisible()
-    window.addEventListener('resize', updateVisible)
-  })
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', updateVisible)
-  })
-  
-  const visibleTestimonials = computed(() => {
-    const visibleItems = []
-    for (let i = 0; i < visible.value; i++) {
-      visibleItems.push(testimonials[(currentIndex.value + i) % testimonials.length])
-    }
-    return visibleItems
-  })
-  
-  function nextSlide() {
-    currentIndex.value = (currentIndex.value + 1) % testimonials.length
-  }
-  
-  function prevSlide() {
-    currentIndex.value = (currentIndex.value - 1 + testimonials.length) % testimonials.length
+  function showLess() {
+    visibleCount.value = 3
   }
   </script>
   
@@ -80,21 +58,13 @@
     color: #111827;
   }
   
-  /* Slider wrapper */
-  .slider-container {
-    position: relative;
-    width: 85%;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  
-  /* Track */
-  .slider-track {
+  .testimonial-wrapper {
     display: flex;
-    transition: transform 0.5s ease;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
   }
   
-  /* Testimonial card */
   .testimonial-card {
     flex: 0 0 calc(100% / 3.6);
     background-color: #ffffff;
@@ -105,14 +75,15 @@
       0 4px 8px rgba(0, 0, 0, 0.1),
       0 6px 20px rgba(0, 0, 0, 0.05);
     text-align: left;
+    transition: all 0.3s ease;
   }
-
+  
   .testimonial-card:hover {
     transform: translateY(-5px);
     box-shadow:
       0 10px 20px rgba(0, 0, 0, 0.25),
       0 8px 30px rgba(0, 0, 0, 0.15);
-      border:2px solid rgb(220, 233, 100);
+    border: 2px solid rgb(220, 233, 100);
   }
   
   .quote {
@@ -128,30 +99,24 @@
     color: #111827;
   }
   
-  /* Navigation buttons */
-  .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(17, 24, 39, 0.7);
+  .testimonial-buttons {
+    margin-top: 1.5rem;
+  }
+  
+  .testimonial-buttons button {
+    background-color: #1f2937;
+    color: white;
     border: none;
-    color: #fff;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    cursor: pointer;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
     border-radius: 0.375rem;
-    z-index: 10;
+    cursor: pointer;
   }
   
-  .nav-button.left {
-    left: 0.5rem;
+  .testimonial-buttons button:hover {
+    background-color: #15803d;
   }
   
-  .nav-button.right {
-    right: 0.5rem;
-  }
-  
-  /* Responsive tweaks */
   @media (max-width: 1024px) {
     .testimonial-card {
       flex: 0 0 calc(100% / 2);
@@ -159,8 +124,29 @@
   }
   
   @media (max-width: 640px) {
+    .testimonial-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
     .testimonial-card {
-      flex: 0 0 100%;
+      width: 100%;
+      max-width: 90%;
+      flex: none;
+      padding: 1rem;
+    }
+  
+    .quote {
+      font-size: 0.875rem;
+    }
+  
+    .name {
+      font-size: 0.75rem;
+    }
+  
+    .testimonial-buttons button {
+      font-size: 0.75rem;
+      padding: 0.4rem 1rem;
     }
   }
   </style>
