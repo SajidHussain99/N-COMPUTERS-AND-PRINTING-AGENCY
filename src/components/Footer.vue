@@ -17,10 +17,16 @@
           <i class="fab fa-instagram"></i>
         </a>
       </div>
+      <div>
+        <p>Shop No. 20, Gulistan-e-Erum, Near Disco Bakery, Block-3, Gulshan-e-Iqbal, Karachi</p>
+      </div>
+      <div>
+        <p>+9203142993599</p>
+      </div>
   
       <!-- Go to Top Arrow -->
       <div class="go-top">
-        <a href="#header" aria-label="Back to Top">
+        <a href="#home" aria-label="Back to Top">
           <i class="fas fa-arrow-up"></i>
         </a>
       </div>

@@ -1,7 +1,8 @@
 <template>
     <div class="section-separator" :style="{ background: bg }">
       <svg class="wave-separator" viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" fill="#f9fafb"></path>
+        <path d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" fill="#10102b"></path>
+        <!-- f9fafb -->
       </svg>
     </div>
   </template>
