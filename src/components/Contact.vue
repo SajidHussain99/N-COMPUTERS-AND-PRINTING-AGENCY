@@ -66,7 +66,7 @@ const whatsappLink = computed(() => {
   const phone = encodeURIComponent(user.value.phone || 'N/A')
   const message = encodeURIComponent(user.value.message || 'No message provided')
 
-  return `https://wa.me/923257267805?text=Contact%20Request:%0AName:%20${name}%0APhone:%20${phone}%0AMessage:%20${message}`
+  return `https://wa.me/923142993599?text=Contact%20Request:%0AName:%20${name}%0APhone:%20${phone}%0AMessage:%20${message}`
 })
 </script>
 
