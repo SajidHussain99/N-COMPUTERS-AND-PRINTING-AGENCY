@@ -1,9 +1,9 @@
 <template>
-    <div class="font-sans">
+    <div>
       <Header />
       <Hero />
 
-      <SectionSeperator bg="linear-gradient(to right, #fbe13b, #a6c23e)" />
+      <SectionSeperator bg="linear-gradient(to left, #fbe13b, #a6c23e)" />
       <About />
   
       <SectionSeperator bg="linear-gradient(to right, #fbc2eb, #a6c1ee)" />
@@ -17,8 +17,10 @@
   
       <SectionSeperator bg="linear-gradient(to right, #c2001b, #a1ddfd)" />
       <Contact />
+
       
       <Footer />
+
     </div>
   </template>
   
@@ -33,6 +35,7 @@
   import Contact from '../components/Contact.vue'
   import Footer from '../components/Footer.vue'
   import SectionSeperator from '../components/section-seperator.vue'
+
   </script>
   
 
