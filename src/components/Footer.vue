@@ -1,7 +1,5 @@
 <template>
     <footer class="footer">
-      <p class="footer-text">© 2025 N-Computer and Printing Agency</p>
-  
       <!-- Social Media Links -->
       <div class="social-icons">
         <a href="https://facebook.com/109717267194085" target="_blank" aria-label="Facebook">
@@ -17,12 +15,22 @@
           <i class="fab fa-instagram"></i>
         </a>
       </div>
+
       <div>
-        <p>Shop No. 20, Gulistan-e-Erum, Near Disco Bakery, Block-3, Gulshan-e-Iqbal, Karachi</p>
+        <a
+          href="https://www.google.co.uk/maps/place/24%C2%B055'44.4%22N+67%C2%B005'49.5%22E/@24.9289433,67.0956527,17.64z/data=!4m4!3m3!8m2!3d24.928999!4d67.097092?entry=ttu&g_ep=EgoyMDI1MDUwNS4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          rel="noopener noreferrer">
+            <p><strong class="shop-address"> Shop No. 20, Gulistan-e-Erum, Near Disco Bakery, Block-3, Gulshan-e-Iqbal, Karachi</strong> </p>
+        </a>
       </div>
+
       <div>
-        <p>+9203142993599</p>
+        <p>+9203142993599 | +9203109077441 </p>
       </div>
+
+
+      <p class="footer-text"> <br>@2025 N-Computer and Printing Agency</p>
   
       <!-- Go to Top Arrow -->
       <div class="go-top">
@@ -81,6 +89,11 @@
   .go-top a:hover {
     transform: translateY(-4px);
     color: #22d3ee; /* Tailwind's cyan-400 */
+  }
+  .shop-address
+  {
+    color: white;
+    font-weight: bold;
   }
   </style>
   
