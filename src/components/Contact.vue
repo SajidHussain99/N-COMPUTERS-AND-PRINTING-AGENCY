@@ -26,7 +26,7 @@
         <h3>Location</h3>
         <p class="info-line">
           📍 <a
-            href="https://www.google.com/maps/dir/?api=1&destination=Karachi%2C%20Sindh%2C%20Pakistan"
+            href="https://www.google.co.uk/maps/place/24%C2%B055'44.4%22N+67%C2%B005'49.5%22E/@24.9289433,67.0956527,17.64z/data=!4m4!3m3!8m2!3d24.928999!4d67.097092?entry=ttu&g_ep=EgoyMDI1MDUwNS4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
           >
